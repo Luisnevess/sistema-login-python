@@ -1,92 +1,105 @@
-usuarios = []
+users = []
 
-def mostrar_menu():
-    print("\n=== SISTEMA DE LOGIN ===")
-    print("1 - Cadastrar usuário")
-    print("2 - Fazer login")
-    print("3 - Listar usuários")
-    print("4 - Sair")
-    print("5 - encerrar conta")
-    
+def show_menu():
+    print("\n=== LOGIN SYSTEM ===")
+    print("1 - Register user")
+    print("2 - Login")
+    print("3 - List users")
+    print("4 - Exit")
+    print("5 - Close account")
 
 while True:
 
-    mostrar_menu()
+    show_menu()
 
-    opcao = input("Escolha uma opção: ")
+    option = input("Choose an option: ")
 
-    if opcao == "1":
+    if option == "1":
 
-        nome = input("Digite o nome do usuário: ")
-        senha = input("Digite a senha: ")
-        
-        if nome in [u["nome"] for u in usuarios]:
-            print("usuario já existe, tente outro nome.")
+        name = input("Enter username: ")
+        password = input("Enter password: ")
+
+        if name in [u["name"] for u in users]:
+
+            print("User already exists. Try another username.")
 
         else:
-            usuario = {
-                "nome": nome,
-                "senha": senha,
-                "status": "ativo"
+
+            user = {
+                "name": name,
+                "password": password,
+                "status": "active"
             }
 
-            usuarios.append(usuario)
+            users.append(user)
 
-            print("Usuário cadastrado com sucesso!")
+            print("User registered successfully!")
 
-    elif opcao == "2":
+    elif option == "2":
 
-        nome_login = input("Digite seu nome: ")
-        senha_login = input("Digite sua senha: ")
+        login_name = input("Enter your username: ")
+        login_password = input("Enter your password: ")
 
-        login_feito = False
+        login_success = False
 
-        for usuario in usuarios:
-            
-            
+        for user in users:
 
-            if usuario["nome"] == nome_login and usuario["senha"] == senha_login:
-                if usuario["status"] == "encerrado":
-                    
-                    print(" conta encerrada, entre em contato com o suporte para mais infomações.")
-                    
+            if user["name"] == login_name and user["password"] == login_password:
+
+                if user["status"] == "closed":
+
+                    print("Account closed. Contact support for more information.")
+
                 else:
-                    print("bem vindo, Estamos muito felizes em recebê-lo!")
-                login_feito = True
 
-        if login_feito == False:
+                    print("Welcome! We are very happy to have you here!")
 
-            print("Usuário ou senha incorretos.")
+                login_success = True
 
-    elif opcao == "3":
+        if login_success == False:
 
-        print("\n=== USUÁRIOS CADASTRADOS ===")
+            print("Incorrect username or password.")
 
-        if len(usuarios) == 0:
+    elif option == "3":
 
-            print("Nenhum usuário cadastrado")
+        print("\n=== REGISTERED USERS ===")
+
+        if len(users) == 0:
+
+            print("No registered users.")
 
         else:
-            
-            for usuario in usuarios:
 
-                print(f"Nome: {usuario['nome']}")
-                print(f"status: {usuario['status']}")
+            for user in users:
+
+                print(f"Name: {user['name']}")
+                print(f"Status: {user['status']}")
                 print("----------------------")
 
-    elif opcao == "4":
+    elif option == "4":
 
-        print("Saindo do sistema...")
+        print("Exiting system...")
         break
-    elif opcao == "5":
-        
-        nome_encerrar = input("Digite seu nome para encerrar a conta: ")
-        senha_encerrar = input("Digite sua senha: ")
 
-        for usuario in usuarios:
-            if usuario["nome"] == nome_encerrar and usuario["senha"] == senha_encerrar:
-                usuario["status"] = "encerrado"
-                print("Conta encerrada com sucesso!")
+    elif option == "5":
+
+        close_name = input("Enter your username to close the account: ")
+        close_password = input("Enter your password: ")
+
+        for user in users:
+
+            if user["name"] == close_name and user["password"] == close_password:
+
+                user["status"] = "closed"
+
+                print("Account closed successfully!")
+
                 break
+
         else:
-            print("Usuário ou senha incorretos.")
+
+            print("Incorrect username or password.")
+
+    else:
+
+        print("Invalid option. Try again.")
